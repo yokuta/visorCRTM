@@ -115,7 +115,9 @@ const fmt = v => v >= 100 ? Math.round(v).toLocaleString("es-ES") : v.toLocaleSt
 
 function dibujar() {
   const min = Math.round(t * 15) % 1440;
-  document.getElementById("reloj").textContent = `${String(Math.floor(min / 60)).padStart(2, "0")}:${String(min % 60).padStart(2, "0")}`;
+  const f = Math.floor(t) % 96, min = f * 15, fin = (min + 15) % 1440;
+  
+  document.getElementById("reloj").textContent = `${String(Math.floor(min / 60)).padStart(2, "0")}:${String(min % 60).padStart(2, "0")}–${String(Math.floor(fin / 60)).padStart(2, "0")}:${String(fin % 60).padStart(2, "0")}`;
   const filas = [];
   estaciones.forEach((e, i) => {
     const d = datos[tipo][i], p = valor(d.p, t), o = valor(d.o, t), m = valor(d.m, t), l = valor(d.l, t);
